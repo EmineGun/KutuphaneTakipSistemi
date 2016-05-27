@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="kutuphaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="kisiler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TC" Type="Int32" />
+    <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="okul_no" Type="Int32" />
+    <Property Name="sinif" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dogum_tarihi" Type="DateTime" Precision="3" />
+    <Property Name="dogum_yeri" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="uyelik_tarihi" Type="DateTime" Precision="3" />
+    <Property Name="cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="resim" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="resim_yolu" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="kitaplar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="barkod_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="kitap_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="yazar_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="yayin_evi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="kitap_turu" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="temin_bicimi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="temin_tarihi" Type="DateTime" Precision="3" />
+    <Property Name="stok_sayisi" Type="Int32" Nullable="false" />
+    <Property Name="resim" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="dosyayolu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="kutuphaneEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="kisilers" EntityType="Self.kisiler" />
+    <EntitySet Name="kitaplars" EntityType="Self.kitaplar" />
+    <FunctionImport Name="kitapekleme">
+      <Parameter Name="barkod" Mode="In" Type="String" />
+      <Parameter Name="kitap_adi" Mode="In" Type="String" />
+      <Parameter Name="yazar_adi" Mode="In" Type="String" />
+      <Parameter Name="yayin_evi" Mode="In" Type="String" />
+      <Parameter Name="kitap_turu" Mode="In" Type="String" />
+      <Parameter Name="temin_bicimi" Mode="In" Type="String" />
+      <Parameter Name="temin_tarihi" Mode="In" Type="DateTime" />
+      <Parameter Name="stok_sayisi" Mode="In" Type="Int32" />
+      <Parameter Name="dosyayolu" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="kisiekleme">
+      <Parameter Name="tc" Mode="In" Type="Int32" />
+      <Parameter Name="ad" Mode="In" Type="String" />
+      <Parameter Name="soyad" Mode="In" Type="String" />
+      <Parameter Name="okulno" Mode="In" Type="Int32" />
+      <Parameter Name="sinif" Mode="In" Type="String" />
+      <Parameter Name="dogumtarihi" Mode="In" Type="DateTime" />
+      <Parameter Name="dogumyeri" Mode="In" Type="String" />
+      <Parameter Name="tel" Mode="In" Type="String" />
+      <Parameter Name="eposta" Mode="In" Type="String" />
+      <Parameter Name="uyeliktarih" Mode="In" Type="DateTime" />
+      <Parameter Name="cinsiyet" Mode="In" Type="String" />
+      <Parameter Name="adres" Mode="In" Type="String" />
+      <Parameter Name="resimyolu" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="resimGetir" ReturnType="Collection(String)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="arama" ReturnType="Collection(kutuphaneModel.arama_Result)">
+      <Parameter Name="Ad" Mode="In" Type="String" />
+      <Parameter Name="Soyad" Mode="In" Type="String" />
+      <Parameter Name="Sinif" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="aramaKitap" ReturnType="Collection(kutuphaneModel.aramaKitap_Result)">
+      <Parameter Name="barkodNo" Mode="In" Type="String" />
+      <Parameter Name="kitapAdi" Mode="In" Type="String" />
+      <Parameter Name="kitapYazari" Mode="In" Type="String" />
+      <Parameter Name="yayinEvi" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="emanetkitapgetir">
+      <Parameter Name="ad" Mode="In" Type="String" />
+      <Parameter Name="okulNo" Mode="In" Type="Int32" />
+      <Parameter Name="kitapAdi" Mode="In" Type="String" />
+      <Parameter Name="baslangicTarihi" Mode="In" Type="DateTime" />
+      <Parameter Name="bitisTarihi" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="emanetkitapEkleme">
+      <Parameter Name="ad" Mode="In" Type="String" />
+      <Parameter Name="kitapAdi" Mode="In" Type="String" />
+      <Parameter Name="baslangicTarihi" Mode="In" Type="DateTime" />
+      <Parameter Name="bitisTarihi" Mode="In" Type="DateTime" />
+      <Parameter Name="okuduguKitap" Mode="In" Type="Int32" />
+      <Parameter Name="emanetKitap" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="emanetkitaplars" EntityType="kutuphaneModel.emanetkitaplar" />
+    <FunctionImport Name="emanetArama" ReturnType="Collection(kutuphaneModel.emanetArama_Result)">
+      <Parameter Name="Ad" Mode="In" Type="String" />
+      <Parameter Name="kitapAdi" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="emanetAramaDeneme">
+      <Parameter Name="Ad" Mode="In" Type="String" />
+      <Parameter Name="kitapAdi" Mode="In" Type="String" />
+      <Parameter Name="yazarAdi" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="tumTablolarGetir" ReturnType="Collection(kutuphaneModel.tumTablolarGetir_Result2)">
+      <Parameter Name="no" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="teslim">
+      <Parameter Name="AdSoyad" Mode="In" Type="String" />
+      <Parameter Name="kitapAdi" Mode="In" Type="String" />
+      <Parameter Name="teslimTarihi" Mode="In" Type="DateTime" />
+      <Parameter Name="hasarDurum" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="teslimAlmaEmanetAzaltma">
+      <Parameter Name="ad" Mode="In" Type="String" />
+      <Parameter Name="kitapAdi" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="arama_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="TC" Nullable="true" />
+    <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="soyad" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="okul_no" Nullable="true" />
+    <Property Type="String" Name="sinif" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="dogum_tarihi" Nullable="true" Precision="23" />
+    <Property Type="String" Name="dogum_yeri" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="telefon" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="eposta" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="uyelik_tarihi" Nullable="true" Precision="23" />
+    <Property Type="String" Name="cinsiyet" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="adres" Nullable="true" MaxLength="255" />
+    <Property Type="Binary" Name="resim" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="resim_yolu" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="aramaKitap_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="barkod_no" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="yayin_evi" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="kitap_turu" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="temin_bicimi" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="temin_tarihi" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="stok_sayisi" Nullable="false" />
+    <Property Type="Binary" Name="resim" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="dosyayolu" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="emanetkitaplar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="kitap_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="baslangic_tarihi" Type="DateTime" Precision="3" />
+    <Property Name="bitistarihi" Type="DateTime" Precision="3" />
+    <Property Name="okuduguKitapSayisi" Type="Int32" />
+    <Property Name="emanetKitapSayisi" Type="Int32" />
+  </EntityType>
+  <ComplexType Name="emanetArama_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="baslangic_tarihi" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="bitistarihi" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="okuduguKitapSayisi" Nullable="true" />
+    <Property Type="Int32" Name="emanetKitapSayisi" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="emanetAramaDeneme_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="baslangic_tarihi" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="bitistarihi" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="okuduguKitapSayisi" Nullable="true" />
+    <Property Type="Int32" Name="emanetKitapSayisi" Nullable="true" />
+    <Property Type="Int32" Name="ID1" Nullable="true" />
+    <Property Type="Int32" Name="TC" Nullable="true" />
+    <Property Type="String" Name="ad1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="soyad" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="okul_no" Nullable="true" />
+    <Property Type="String" Name="sinif" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="dogum_tarihi" Nullable="true" Precision="23" />
+    <Property Type="String" Name="dogum_yeri" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="telefon" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="eposta" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="uyelik_tarihi" Nullable="true" Precision="23" />
+    <Property Type="String" Name="cinsiyet" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="adres" Nullable="true" MaxLength="255" />
+    <Property Type="Binary" Name="resim" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="resim_yolu" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="ID2" Nullable="true" />
+    <Property Type="String" Name="barkod_no" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="kitap_adi1" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="yayin_evi" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="kitap_turu" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="temin_bicimi" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="temin_tarihi" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="stok_sayisi" Nullable="true" />
+    <Property Type="Binary" Name="resim1" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="dosyayolu" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="tumTablolarGetir_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="baslangic_tarihi" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="bitistarihi" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="okuduguKitapSayisi" Nullable="true" />
+    <Property Type="Int32" Name="emanetKitapSayisi" Nullable="true" />
+    <Property Type="Int32" Name="ID1" Nullable="true" />
+    <Property Type="Int32" Name="TC" Nullable="true" />
+    <Property Type="String" Name="ad1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="soyad" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="okul_no" Nullable="true" />
+    <Property Type="String" Name="sinif" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="dogum_tarihi" Nullable="true" Precision="23" />
+    <Property Type="String" Name="dogum_yeri" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="telefon" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="eposta" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="uyelik_tarihi" Nullable="true" Precision="23" />
+    <Property Type="String" Name="cinsiyet" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="adres" Nullable="true" MaxLength="255" />
+    <Property Type="Binary" Name="resim" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="resim_yolu" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="ID2" Nullable="true" />
+    <Property Type="String" Name="barkod_no" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="kitap_adi1" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="yayin_evi" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="kitap_turu" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="temin_bicimi" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="temin_tarihi" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="stok_sayisi" Nullable="true" />
+    <Property Type="Binary" Name="resim1" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="dosyayolu" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="tumTablolarGetir_Result1">
+    <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="okul_no" Nullable="true" />
+    <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="tumTablolarGetir_Result2">
+    <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="soyad" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="okul_no" Nullable="true" />
+    <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+  </ComplexType>
+</Schema>

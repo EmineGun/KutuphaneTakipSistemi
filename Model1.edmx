@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="kutuphaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="emanetkitaplar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="50" />
+          <Property Name="kitap_adi" Type="varchar" MaxLength="255" />
+          <Property Name="baslangic_tarihi" Type="datetime" />
+          <Property Name="bitistarihi" Type="datetime" />
+          <Property Name="okuduguKitapSayisi" Type="int" />
+          <Property Name="emanetKitapSayisi" Type="int" />
+        </EntityType>
+        <EntityType Name="kisiler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TC" Type="int" />
+          <Property Name="ad" Type="varchar" MaxLength="50" />
+          <Property Name="soyad" Type="varchar" MaxLength="50" />
+          <Property Name="okul_no" Type="int" />
+          <Property Name="sinif" Type="varchar" MaxLength="50" />
+          <Property Name="dogum_tarihi" Type="datetime" />
+          <Property Name="dogum_yeri" Type="varchar" MaxLength="50" />
+          <Property Name="telefon" Type="varchar" MaxLength="50" />
+          <Property Name="eposta" Type="varchar" MaxLength="50" />
+          <Property Name="uyelik_tarihi" Type="datetime" />
+          <Property Name="cinsiyet" Type="varchar" MaxLength="50" />
+          <Property Name="adres" Type="varchar" MaxLength="255" />
+          <Property Name="resim" Type="image" />
+          <Property Name="resim_yolu" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="kitaplar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="barkod_no" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="kitap_adi" Type="varchar" MaxLength="255" />
+          <Property Name="yazar_adi" Type="varchar" MaxLength="255" />
+          <Property Name="yayin_evi" Type="varchar" MaxLength="255" />
+          <Property Name="kitap_turu" Type="varchar" MaxLength="255" />
+          <Property Name="temin_bicimi" Type="varchar" MaxLength="255" />
+          <Property Name="temin_tarihi" Type="datetime" />
+          <Property Name="stok_sayisi" Type="int" Nullable="false" />
+          <Property Name="resim" Type="image" />
+          <Property Name="dosyayolu" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="arama" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ad" Type="varchar" Mode="In" />
+          <Parameter Name="Soyad" Type="varchar" Mode="In" />
+          <Parameter Name="Sinif" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="aramaKitap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="barkodNo" Type="varchar" Mode="In" />
+          <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+          <Parameter Name="kitapYazari" Type="varchar" Mode="In" />
+          <Parameter Name="yayinEvi" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="emanetArama" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ad" Type="varchar" Mode="In" />
+          <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="emanetAramaDeneme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ad" Type="varchar" Mode="In" />
+          <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+          <Parameter Name="yazarAdi" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="emanetkitapEkleme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ad" Type="varchar" Mode="In" />
+          <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+          <Parameter Name="baslangicTarihi" Type="datetime" Mode="In" />
+          <Parameter Name="bitisTarihi" Type="datetime" Mode="In" />
+          <Parameter Name="okuduguKitap" Type="int" Mode="In" />
+          <Parameter Name="emanetKitap" Type="int" Mode="In" />
+        </Function>
+        <Function Name="kisiekleme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tc" Type="int" Mode="In" />
+          <Parameter Name="ad" Type="varchar" Mode="In" />
+          <Parameter Name="soyad" Type="varchar" Mode="In" />
+          <Parameter Name="okulno" Type="int" Mode="In" />
+          <Parameter Name="sinif" Type="varchar" Mode="In" />
+          <Parameter Name="dogumtarihi" Type="datetime" Mode="In" />
+          <Parameter Name="dogumyeri" Type="varchar" Mode="In" />
+          <Parameter Name="tel" Type="varchar" Mode="In" />
+          <Parameter Name="eposta" Type="varchar" Mode="In" />
+          <Parameter Name="uyeliktarih" Type="datetime" Mode="In" />
+          <Parameter Name="cinsiyet" Type="varchar" Mode="In" />
+          <Parameter Name="adres" Type="varchar" Mode="In" />
+          <Parameter Name="resimyolu" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="kitapekleme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="barkod" Type="varchar" Mode="In" />
+          <Parameter Name="kitap_adi" Type="varchar" Mode="In" />
+          <Parameter Name="yazar_adi" Type="varchar" Mode="In" />
+          <Parameter Name="yayin_evi" Type="varchar" Mode="In" />
+          <Parameter Name="kitap_turu" Type="varchar" Mode="In" />
+          <Parameter Name="temin_bicimi" Type="varchar" Mode="In" />
+          <Parameter Name="temin_tarihi" Type="datetime" Mode="In" />
+          <Parameter Name="stok_sayisi" Type="int" Mode="In" />
+          <Parameter Name="dosyayolu" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="resimGetir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="teslim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AdSoyad" Type="varchar" Mode="In" />
+          <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+          <Parameter Name="teslimTarihi" Type="datetime" Mode="In" />
+          <Parameter Name="hasarDurum" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="teslimAlmaEmanetAzaltma" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ad" Type="varchar" Mode="In" />
+          <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="tumTablolarGetir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="no" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="kutuphaneModelStoreContainer">
+          <EntitySet Name="emanetkitaplar" EntityType="Self.emanetkitaplar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kisiler" EntityType="Self.kisiler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kitaplar" EntityType="Self.kitaplar" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kutuphaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="kisiler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TC" Type="Int32" />
+          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="okul_no" Type="Int32" />
+          <Property Name="sinif" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dogum_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="dogum_yeri" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="uyelik_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="resim" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="resim_yolu" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="kitaplar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="barkod_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kitap_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="yazar_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="yayin_evi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="kitap_turu" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="temin_bicimi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="temin_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="stok_sayisi" Type="Int32" Nullable="false" />
+          <Property Name="resim" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="dosyayolu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="kutuphaneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="kisilers" EntityType="Self.kisiler" />
+          <EntitySet Name="kitaplars" EntityType="Self.kitaplar" />
+          <FunctionImport Name="kitapekleme">
+            <Parameter Name="barkod" Mode="In" Type="String" />
+            <Parameter Name="kitap_adi" Mode="In" Type="String" />
+            <Parameter Name="yazar_adi" Mode="In" Type="String" />
+            <Parameter Name="yayin_evi" Mode="In" Type="String" />
+            <Parameter Name="kitap_turu" Mode="In" Type="String" />
+            <Parameter Name="temin_bicimi" Mode="In" Type="String" />
+            <Parameter Name="temin_tarihi" Mode="In" Type="DateTime" />
+            <Parameter Name="stok_sayisi" Mode="In" Type="Int32" />
+            <Parameter Name="dosyayolu" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="kisiekleme">
+            <Parameter Name="tc" Mode="In" Type="Int32" />
+            <Parameter Name="ad" Mode="In" Type="String" />
+            <Parameter Name="soyad" Mode="In" Type="String" />
+            <Parameter Name="okulno" Mode="In" Type="Int32" />
+            <Parameter Name="sinif" Mode="In" Type="String" />
+            <Parameter Name="dogumtarihi" Mode="In" Type="DateTime" />
+            <Parameter Name="dogumyeri" Mode="In" Type="String" />
+            <Parameter Name="tel" Mode="In" Type="String" />
+            <Parameter Name="eposta" Mode="In" Type="String" />
+            <Parameter Name="uyeliktarih" Mode="In" Type="DateTime" />
+            <Parameter Name="cinsiyet" Mode="In" Type="String" />
+            <Parameter Name="adres" Mode="In" Type="String" />
+            <Parameter Name="resimyolu" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="resimGetir" ReturnType="Collection(String)">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="arama" ReturnType="Collection(kutuphaneModel.arama_Result)">
+            <Parameter Name="Ad" Mode="In" Type="String" />
+            <Parameter Name="Soyad" Mode="In" Type="String" />
+            <Parameter Name="Sinif" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="aramaKitap" ReturnType="Collection(kutuphaneModel.aramaKitap_Result)">
+            <Parameter Name="barkodNo" Mode="In" Type="String" />
+            <Parameter Name="kitapAdi" Mode="In" Type="String" />
+            <Parameter Name="kitapYazari" Mode="In" Type="String" />
+            <Parameter Name="yayinEvi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="emanetkitapgetir">
+            <Parameter Name="ad" Mode="In" Type="String" />
+            <Parameter Name="okulNo" Mode="In" Type="Int32" />
+            <Parameter Name="kitapAdi" Mode="In" Type="String" />
+            <Parameter Name="baslangicTarihi" Mode="In" Type="DateTime" />
+            <Parameter Name="bitisTarihi" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="emanetkitapEkleme">
+            <Parameter Name="ad" Mode="In" Type="String" />
+            <Parameter Name="kitapAdi" Mode="In" Type="String" />
+            <Parameter Name="baslangicTarihi" Mode="In" Type="DateTime" />
+            <Parameter Name="bitisTarihi" Mode="In" Type="DateTime" />
+            <Parameter Name="okuduguKitap" Mode="In" Type="Int32" />
+            <Parameter Name="emanetKitap" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="emanetkitaplars" EntityType="kutuphaneModel.emanetkitaplar" />
+          <FunctionImport Name="emanetArama" ReturnType="Collection(kutuphaneModel.emanetArama_Result)">
+            <Parameter Name="Ad" Mode="In" Type="String" />
+            <Parameter Name="kitapAdi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="emanetAramaDeneme">
+            <Parameter Name="Ad" Mode="In" Type="String" />
+            <Parameter Name="kitapAdi" Mode="In" Type="String" />
+            <Parameter Name="yazarAdi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="tumTablolarGetir" ReturnType="Collection(kutuphaneModel.tumTablolarGetir_Result2)">
+          <Parameter Name="no" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="teslim">
+            <Parameter Name="AdSoyad" Mode="In" Type="String" />
+            <Parameter Name="kitapAdi" Mode="In" Type="String" />
+            <Parameter Name="teslimTarihi" Mode="In" Type="DateTime" />
+            <Parameter Name="hasarDurum" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="teslimAlmaEmanetAzaltma">
+            <Parameter Name="ad" Mode="In" Type="String" />
+            <Parameter Name="kitapAdi" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="arama_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="TC" Nullable="true" />
+          <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="soyad" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="okul_no" Nullable="true" />
+          <Property Type="String" Name="sinif" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="dogum_tarihi" Nullable="true" Precision="23" />
+          <Property Type="String" Name="dogum_yeri" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="telefon" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="eposta" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="uyelik_tarihi" Nullable="true" Precision="23" />
+          <Property Type="String" Name="cinsiyet" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="adres" Nullable="true" MaxLength="255" />
+          <Property Type="Binary" Name="resim" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="resim_yolu" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="aramaKitap_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="barkod_no" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="yayin_evi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="kitap_turu" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="temin_bicimi" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="temin_tarihi" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="stok_sayisi" Nullable="false" />
+          <Property Type="Binary" Name="resim" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="dosyayolu" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="emanetkitaplar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kitap_adi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="baslangic_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="bitistarihi" Type="DateTime" Precision="3" />
+          <Property Name="okuduguKitapSayisi" Type="Int32" />
+          <Property Name="emanetKitapSayisi" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="emanetArama_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="baslangic_tarihi" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="bitistarihi" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="okuduguKitapSayisi" Nullable="true" />
+          <Property Type="Int32" Name="emanetKitapSayisi" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="emanetAramaDeneme_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="baslangic_tarihi" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="bitistarihi" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="okuduguKitapSayisi" Nullable="true" />
+          <Property Type="Int32" Name="emanetKitapSayisi" Nullable="true" />
+          <Property Type="Int32" Name="ID1" Nullable="true" />
+          <Property Type="Int32" Name="TC" Nullable="true" />
+          <Property Type="String" Name="ad1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="soyad" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="okul_no" Nullable="true" />
+          <Property Type="String" Name="sinif" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="dogum_tarihi" Nullable="true" Precision="23" />
+          <Property Type="String" Name="dogum_yeri" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="telefon" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="eposta" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="uyelik_tarihi" Nullable="true" Precision="23" />
+          <Property Type="String" Name="cinsiyet" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="adres" Nullable="true" MaxLength="255" />
+          <Property Type="Binary" Name="resim" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="resim_yolu" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="ID2" Nullable="true" />
+          <Property Type="String" Name="barkod_no" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="kitap_adi1" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="yayin_evi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="kitap_turu" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="temin_bicimi" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="temin_tarihi" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="stok_sayisi" Nullable="true" />
+          <Property Type="Binary" Name="resim1" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="dosyayolu" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="tumTablolarGetir_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="baslangic_tarihi" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="bitistarihi" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="okuduguKitapSayisi" Nullable="true" />
+          <Property Type="Int32" Name="emanetKitapSayisi" Nullable="true" />
+          <Property Type="Int32" Name="ID1" Nullable="true" />
+          <Property Type="Int32" Name="TC" Nullable="true" />
+          <Property Type="String" Name="ad1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="soyad" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="okul_no" Nullable="true" />
+          <Property Type="String" Name="sinif" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="dogum_tarihi" Nullable="true" Precision="23" />
+          <Property Type="String" Name="dogum_yeri" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="telefon" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="eposta" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="uyelik_tarihi" Nullable="true" Precision="23" />
+          <Property Type="String" Name="cinsiyet" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="adres" Nullable="true" MaxLength="255" />
+          <Property Type="Binary" Name="resim" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="resim_yolu" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="ID2" Nullable="true" />
+          <Property Type="String" Name="barkod_no" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="kitap_adi1" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="yayin_evi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="kitap_turu" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="temin_bicimi" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="temin_tarihi" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="stok_sayisi" Nullable="true" />
+          <Property Type="Binary" Name="resim1" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="dosyayolu" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="tumTablolarGetir_Result1">
+          <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="okul_no" Nullable="true" />
+          <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="tumTablolarGetir_Result2">
+          <Property Type="String" Name="ad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="soyad" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="okul_no" Nullable="true" />
+          <Property Type="String" Name="kitap_adi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="yazar_adi" Nullable="true" MaxLength="255" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="kutuphaneModelStoreContainer" CdmEntityContainer="kutuphaneEntities">
+          <EntitySetMapping Name="kisilers">
+            <EntityTypeMapping TypeName="kutuphaneModel.kisiler">
+              <MappingFragment StoreEntitySet="kisiler">
+                <ScalarProperty Name="resim_yolu" ColumnName="resim_yolu" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TC" ColumnName="TC" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="okul_no" ColumnName="okul_no" />
+                <ScalarProperty Name="sinif" ColumnName="sinif" />
+                <ScalarProperty Name="dogum_tarihi" ColumnName="dogum_tarihi" />
+                <ScalarProperty Name="dogum_yeri" ColumnName="dogum_yeri" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="eposta" ColumnName="eposta" />
+                <ScalarProperty Name="uyelik_tarihi" ColumnName="uyelik_tarihi" />
+                <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="resim" ColumnName="resim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kitaplars">
+            <EntityTypeMapping TypeName="kutuphaneModel.kitaplar">
+              <MappingFragment StoreEntitySet="kitaplar">
+                <ScalarProperty Name="dosyayolu" ColumnName="dosyayolu" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="barkod_no" ColumnName="barkod_no" />
+                <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+                <ScalarProperty Name="yazar_adi" ColumnName="yazar_adi" />
+                <ScalarProperty Name="yayin_evi" ColumnName="yayin_evi" />
+                <ScalarProperty Name="kitap_turu" ColumnName="kitap_turu" />
+                <ScalarProperty Name="temin_bicimi" ColumnName="temin_bicimi" />
+                <ScalarProperty Name="temin_tarihi" ColumnName="temin_tarihi" />
+                <ScalarProperty Name="stok_sayisi" ColumnName="stok_sayisi" />
+                <ScalarProperty Name="resim" ColumnName="resim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="kitapekleme" FunctionName="kutuphaneModel.Store.kitapekleme" />
+          <FunctionImportMapping FunctionImportName="kisiekleme" FunctionName="kutuphaneModel.Store.kisiekleme" />
+          <FunctionImportMapping FunctionImportName="resimGetir" FunctionName="kutuphaneModel.Store.resimGetir" />
+          <FunctionImportMapping FunctionImportName="arama" FunctionName="kutuphaneModel.Store.arama">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="kutuphaneModel.arama_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TC" ColumnName="TC" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="okul_no" ColumnName="okul_no" />
+                <ScalarProperty Name="sinif" ColumnName="sinif" />
+                <ScalarProperty Name="dogum_tarihi" ColumnName="dogum_tarihi" />
+                <ScalarProperty Name="dogum_yeri" ColumnName="dogum_yeri" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="eposta" ColumnName="eposta" />
+                <ScalarProperty Name="uyelik_tarihi" ColumnName="uyelik_tarihi" />
+                <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="resim" ColumnName="resim" />
+                <ScalarProperty Name="resim_yolu" ColumnName="resim_yolu" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="aramaKitap" FunctionName="kutuphaneModel.Store.aramaKitap">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="kutuphaneModel.aramaKitap_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="barkod_no" ColumnName="barkod_no" />
+                <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+                <ScalarProperty Name="yazar_adi" ColumnName="yazar_adi" />
+                <ScalarProperty Name="yayin_evi" ColumnName="yayin_evi" />
+                <ScalarProperty Name="kitap_turu" ColumnName="kitap_turu" />
+                <ScalarProperty Name="temin_bicimi" ColumnName="temin_bicimi" />
+                <ScalarProperty Name="temin_tarihi" ColumnName="temin_tarihi" />
+                <ScalarProperty Name="stok_sayisi" ColumnName="stok_sayisi" />
+                <ScalarProperty Name="resim" ColumnName="resim" />
+                <ScalarProperty Name="dosyayolu" ColumnName="dosyayolu" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="emanetkitapEkleme" FunctionName="kutuphaneModel.Store.emanetkitapEkleme" />
+          <EntitySetMapping Name="emanetkitaplars">
+            <EntityTypeMapping TypeName="kutuphaneModel.emanetkitaplar">
+              <MappingFragment StoreEntitySet="emanetkitaplar">
+                <ScalarProperty Name="emanetKitapSayisi" ColumnName="emanetKitapSayisi" />
+                <ScalarProperty Name="okuduguKitapSayisi" ColumnName="okuduguKitapSayisi" />
+                <ScalarProperty Name="bitistarihi" ColumnName="bitistarihi" />
+                <ScalarProperty Name="baslangic_tarihi" ColumnName="baslangic_tarihi" />
+                <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="emanetArama" FunctionName="kutuphaneModel.Store.emanetArama">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="kutuphaneModel.emanetArama_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+                <ScalarProperty Name="baslangic_tarihi" ColumnName="baslangic_tarihi" />
+                <ScalarProperty Name="bitistarihi" ColumnName="bitistarihi" />
+                <ScalarProperty Name="okuduguKitapSayisi" ColumnName="okuduguKitapSayisi" />
+                <ScalarProperty Name="emanetKitapSayisi" ColumnName="emanetKitapSayisi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="emanetAramaDeneme" FunctionName="kutuphaneModel.Store.emanetAramaDeneme" />
+          <FunctionImportMapping FunctionImportName="tumTablolarGetir" FunctionName="kutuphaneModel.Store.tumTablolarGetir">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="kutuphaneModel.tumTablolarGetir_Result2">
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="okul_no" ColumnName="okul_no" />
+                <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+                <ScalarProperty Name="yazar_adi" ColumnName="yazar_adi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="teslim" FunctionName="kutuphaneModel.Store.teslim" />
+          <FunctionImportMapping FunctionImportName="teslimAlmaEmanetAzaltma" FunctionName="kutuphaneModel.Store.teslimAlmaEmanetAzaltma" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

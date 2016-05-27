@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="kutuphaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="emanetkitaplar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ad" Type="varchar" MaxLength="50" />
+    <Property Name="kitap_adi" Type="varchar" MaxLength="255" />
+    <Property Name="baslangic_tarihi" Type="datetime" />
+    <Property Name="bitistarihi" Type="datetime" />
+    <Property Name="okuduguKitapSayisi" Type="int" />
+    <Property Name="emanetKitapSayisi" Type="int" />
+  </EntityType>
+  <EntityType Name="kisiler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TC" Type="int" />
+    <Property Name="ad" Type="varchar" MaxLength="50" />
+    <Property Name="soyad" Type="varchar" MaxLength="50" />
+    <Property Name="okul_no" Type="int" />
+    <Property Name="sinif" Type="varchar" MaxLength="50" />
+    <Property Name="dogum_tarihi" Type="datetime" />
+    <Property Name="dogum_yeri" Type="varchar" MaxLength="50" />
+    <Property Name="telefon" Type="varchar" MaxLength="50" />
+    <Property Name="eposta" Type="varchar" MaxLength="50" />
+    <Property Name="uyelik_tarihi" Type="datetime" />
+    <Property Name="cinsiyet" Type="varchar" MaxLength="50" />
+    <Property Name="adres" Type="varchar" MaxLength="255" />
+    <Property Name="resim" Type="image" />
+    <Property Name="resim_yolu" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="kitaplar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="barkod_no" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="kitap_adi" Type="varchar" MaxLength="255" />
+    <Property Name="yazar_adi" Type="varchar" MaxLength="255" />
+    <Property Name="yayin_evi" Type="varchar" MaxLength="255" />
+    <Property Name="kitap_turu" Type="varchar" MaxLength="255" />
+    <Property Name="temin_bicimi" Type="varchar" MaxLength="255" />
+    <Property Name="temin_tarihi" Type="datetime" />
+    <Property Name="stok_sayisi" Type="int" Nullable="false" />
+    <Property Name="resim" Type="image" />
+    <Property Name="dosyayolu" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Function Name="arama" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Ad" Type="varchar" Mode="In" />
+    <Parameter Name="Soyad" Type="varchar" Mode="In" />
+    <Parameter Name="Sinif" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="aramaKitap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="barkodNo" Type="varchar" Mode="In" />
+    <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+    <Parameter Name="kitapYazari" Type="varchar" Mode="In" />
+    <Parameter Name="yayinEvi" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="emanetArama" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Ad" Type="varchar" Mode="In" />
+    <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="emanetAramaDeneme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Ad" Type="varchar" Mode="In" />
+    <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+    <Parameter Name="yazarAdi" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="emanetkitapEkleme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ad" Type="varchar" Mode="In" />
+    <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+    <Parameter Name="baslangicTarihi" Type="datetime" Mode="In" />
+    <Parameter Name="bitisTarihi" Type="datetime" Mode="In" />
+    <Parameter Name="okuduguKitap" Type="int" Mode="In" />
+    <Parameter Name="emanetKitap" Type="int" Mode="In" />
+  </Function>
+  <Function Name="kisiekleme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tc" Type="int" Mode="In" />
+    <Parameter Name="ad" Type="varchar" Mode="In" />
+    <Parameter Name="soyad" Type="varchar" Mode="In" />
+    <Parameter Name="okulno" Type="int" Mode="In" />
+    <Parameter Name="sinif" Type="varchar" Mode="In" />
+    <Parameter Name="dogumtarihi" Type="datetime" Mode="In" />
+    <Parameter Name="dogumyeri" Type="varchar" Mode="In" />
+    <Parameter Name="tel" Type="varchar" Mode="In" />
+    <Parameter Name="eposta" Type="varchar" Mode="In" />
+    <Parameter Name="uyeliktarih" Type="datetime" Mode="In" />
+    <Parameter Name="cinsiyet" Type="varchar" Mode="In" />
+    <Parameter Name="adres" Type="varchar" Mode="In" />
+    <Parameter Name="resimyolu" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="kitapekleme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="barkod" Type="varchar" Mode="In" />
+    <Parameter Name="kitap_adi" Type="varchar" Mode="In" />
+    <Parameter Name="yazar_adi" Type="varchar" Mode="In" />
+    <Parameter Name="yayin_evi" Type="varchar" Mode="In" />
+    <Parameter Name="kitap_turu" Type="varchar" Mode="In" />
+    <Parameter Name="temin_bicimi" Type="varchar" Mode="In" />
+    <Parameter Name="temin_tarihi" Type="datetime" Mode="In" />
+    <Parameter Name="stok_sayisi" Type="int" Mode="In" />
+    <Parameter Name="dosyayolu" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="resimGetir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="teslim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AdSoyad" Type="varchar" Mode="In" />
+    <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+    <Parameter Name="teslimTarihi" Type="datetime" Mode="In" />
+    <Parameter Name="hasarDurum" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="teslimAlmaEmanetAzaltma" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ad" Type="varchar" Mode="In" />
+    <Parameter Name="kitapAdi" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="tumTablolarGetir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="no" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="kutuphaneModelStoreContainer">
+    <EntitySet Name="emanetkitaplar" EntityType="Self.emanetkitaplar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kisiler" EntityType="Self.kisiler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kitaplar" EntityType="Self.kitaplar" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

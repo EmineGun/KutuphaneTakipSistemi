@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="kutuphaneModelStoreContainer" CdmEntityContainer="kutuphaneEntities">
+    <EntitySetMapping Name="kisilers">
+      <EntityTypeMapping TypeName="kutuphaneModel.kisiler">
+        <MappingFragment StoreEntitySet="kisiler">
+          <ScalarProperty Name="resim_yolu" ColumnName="resim_yolu" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TC" ColumnName="TC" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="okul_no" ColumnName="okul_no" />
+          <ScalarProperty Name="sinif" ColumnName="sinif" />
+          <ScalarProperty Name="dogum_tarihi" ColumnName="dogum_tarihi" />
+          <ScalarProperty Name="dogum_yeri" ColumnName="dogum_yeri" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+          <ScalarProperty Name="eposta" ColumnName="eposta" />
+          <ScalarProperty Name="uyelik_tarihi" ColumnName="uyelik_tarihi" />
+          <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+          <ScalarProperty Name="adres" ColumnName="adres" />
+          <ScalarProperty Name="resim" ColumnName="resim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="kitaplars">
+      <EntityTypeMapping TypeName="kutuphaneModel.kitaplar">
+        <MappingFragment StoreEntitySet="kitaplar">
+          <ScalarProperty Name="dosyayolu" ColumnName="dosyayolu" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="barkod_no" ColumnName="barkod_no" />
+          <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+          <ScalarProperty Name="yazar_adi" ColumnName="yazar_adi" />
+          <ScalarProperty Name="yayin_evi" ColumnName="yayin_evi" />
+          <ScalarProperty Name="kitap_turu" ColumnName="kitap_turu" />
+          <ScalarProperty Name="temin_bicimi" ColumnName="temin_bicimi" />
+          <ScalarProperty Name="temin_tarihi" ColumnName="temin_tarihi" />
+          <ScalarProperty Name="stok_sayisi" ColumnName="stok_sayisi" />
+          <ScalarProperty Name="resim" ColumnName="resim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="kitapekleme" FunctionName="kutuphaneModel.Store.kitapekleme" />
+    <FunctionImportMapping FunctionImportName="kisiekleme" FunctionName="kutuphaneModel.Store.kisiekleme" />
+    <FunctionImportMapping FunctionImportName="resimGetir" FunctionName="kutuphaneModel.Store.resimGetir" />
+    <FunctionImportMapping FunctionImportName="arama" FunctionName="kutuphaneModel.Store.arama">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="kutuphaneModel.arama_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TC" ColumnName="TC" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="okul_no" ColumnName="okul_no" />
+          <ScalarProperty Name="sinif" ColumnName="sinif" />
+          <ScalarProperty Name="dogum_tarihi" ColumnName="dogum_tarihi" />
+          <ScalarProperty Name="dogum_yeri" ColumnName="dogum_yeri" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+          <ScalarProperty Name="eposta" ColumnName="eposta" />
+          <ScalarProperty Name="uyelik_tarihi" ColumnName="uyelik_tarihi" />
+          <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+          <ScalarProperty Name="adres" ColumnName="adres" />
+          <ScalarProperty Name="resim" ColumnName="resim" />
+          <ScalarProperty Name="resim_yolu" ColumnName="resim_yolu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="aramaKitap" FunctionName="kutuphaneModel.Store.aramaKitap">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="kutuphaneModel.aramaKitap_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="barkod_no" ColumnName="barkod_no" />
+          <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+          <ScalarProperty Name="yazar_adi" ColumnName="yazar_adi" />
+          <ScalarProperty Name="yayin_evi" ColumnName="yayin_evi" />
+          <ScalarProperty Name="kitap_turu" ColumnName="kitap_turu" />
+          <ScalarProperty Name="temin_bicimi" ColumnName="temin_bicimi" />
+          <ScalarProperty Name="temin_tarihi" ColumnName="temin_tarihi" />
+          <ScalarProperty Name="stok_sayisi" ColumnName="stok_sayisi" />
+          <ScalarProperty Name="resim" ColumnName="resim" />
+          <ScalarProperty Name="dosyayolu" ColumnName="dosyayolu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="emanetkitapEkleme" FunctionName="kutuphaneModel.Store.emanetkitapEkleme" />
+    <EntitySetMapping Name="emanetkitaplars">
+      <EntityTypeMapping TypeName="kutuphaneModel.emanetkitaplar">
+        <MappingFragment StoreEntitySet="emanetkitaplar">
+          <ScalarProperty Name="emanetKitapSayisi" ColumnName="emanetKitapSayisi" />
+          <ScalarProperty Name="okuduguKitapSayisi" ColumnName="okuduguKitapSayisi" />
+          <ScalarProperty Name="bitistarihi" ColumnName="bitistarihi" />
+          <ScalarProperty Name="baslangic_tarihi" ColumnName="baslangic_tarihi" />
+          <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="emanetArama" FunctionName="kutuphaneModel.Store.emanetArama">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="kutuphaneModel.emanetArama_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+          <ScalarProperty Name="baslangic_tarihi" ColumnName="baslangic_tarihi" />
+          <ScalarProperty Name="bitistarihi" ColumnName="bitistarihi" />
+          <ScalarProperty Name="okuduguKitapSayisi" ColumnName="okuduguKitapSayisi" />
+          <ScalarProperty Name="emanetKitapSayisi" ColumnName="emanetKitapSayisi" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="emanetAramaDeneme" FunctionName="kutuphaneModel.Store.emanetAramaDeneme" />
+    <FunctionImportMapping FunctionImportName="tumTablolarGetir" FunctionName="kutuphaneModel.Store.tumTablolarGetir">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="kutuphaneModel.tumTablolarGetir_Result2">
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="okul_no" ColumnName="okul_no" />
+          <ScalarProperty Name="kitap_adi" ColumnName="kitap_adi" />
+          <ScalarProperty Name="yazar_adi" ColumnName="yazar_adi" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="teslim" FunctionName="kutuphaneModel.Store.teslim" />
+    <FunctionImportMapping FunctionImportName="teslimAlmaEmanetAzaltma" FunctionName="kutuphaneModel.Store.teslimAlmaEmanetAzaltma" />
+  </EntityContainerMapping>
+</Mapping>
